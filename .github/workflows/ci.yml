@@ -12,30 +12,60 @@
 # - Checks out the repository using the actions/checkout@v2 action.
 # - Runs a step named "Goodbye world" that prints "Goodbye, world!" to the console using bash.
 
-name: Hello world workflow
+# name: Hello world workflow
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+#   workflow_dispatch:
+
+# jobs:
+#   hello:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Hello world
+#         run: echo Hello, world!
+#         shell: bash
+    
+#   goodbye:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Goodbye world
+#         run: echo Goodbye, world!
+#         shell: bash
+
+name: Node.js CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+    branches: [main]
 
 jobs:
-  hello:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Hello world
-        run: echo Hello, world!
-        shell: bash
-    
-  goodbye:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Goodbye world
-        run: echo Goodbye, world!
-        shell: bash
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build Docker image
+        run: docker build -t my-node-app .
