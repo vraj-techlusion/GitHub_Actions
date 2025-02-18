@@ -1,3 +1,17 @@
+# This is a GitHub Actions workflow configuration file named "Hello world workflow".
+# It is triggered on push and pull request events to the 'main' branch, and can also be manually triggered using the workflow_dispatch event.
+
+# The workflow defines two jobs: 'hello' and 'goodbye'.
+# Both jobs run on the latest version of Ubuntu.
+
+# The 'hello' job:
+# - Checks out the repository using the actions/checkout@v2 action.
+# - Runs a step named "Hello world" that prints "Hello, world!" to the console using bash.
+
+# The 'goodbye' job:
+# - Checks out the repository using the actions/checkout@v2 action.
+# - Runs a step named "Goodbye world" that prints "Goodbye, world!" to the console using bash.
+
 name: Hello world workflow
 
 on:
