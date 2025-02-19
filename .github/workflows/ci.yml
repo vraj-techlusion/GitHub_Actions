@@ -63,9 +63,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: my-node-app
 
       - name: Run tests
         run: npm test
+        working-directory: my-node-app 
 
       - name: Build Docker image
         run: docker build -t my-node-app .
+        working-directory: my-node-app
